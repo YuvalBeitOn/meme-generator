@@ -1,0 +1,25 @@
+.filters {
+    height: 6.25rem;
+}
+
+.img-gallery {
+    width: 100%;
+    padding: 3.125rem;
+}
+
+.img-gallery .gallery-item {
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 1rem;
+}
+
+.img-gallery img {
+    display: block;
+    width: 353px;
+}
+
+.img-gallery img:hover {
+    cursor: pointer;
+}
+
+.search-meme {}

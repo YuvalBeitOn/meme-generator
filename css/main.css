@@ -1,0 +1,83 @@
+@import "/css/editor.css";
+@import "/css/gallery.css";
+* {
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+}
+
+@font-face {
+    font-family: monts;
+    src: url('/fonts/Montserrat-Regular.ttf');
+}
+
+body {
+    margin: 0;
+    width: inherit;
+    background-color: #e3e3e3;
+}
+
+header {
+    height: 4.12rem;
+    padding: 0 3.125rem 0 3.125rem;
+    margin-bottom: 1.625rem;
+    background-color: #ff7f00;
+}
+
+nav {
+    font-family: monts;
+    font-size: 1.187rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-link:not(:last-child):after {
+    content: ' |';
+}
+
+.logo {
+    width: 8.312rem;
+}
+
+.about {
+    height: 35.5rem;
+}
+
+.main-footer {
+    background-color: #ff7f00;
+    height: 13rem;
+}
+
+
+/* helpers */
+
+.flex {
+    display: flex;
+}
+
+.flex.space-between {
+    justify-content: space-between;
+}
+
+.flex.align-center {
+    align-items: center;
+}
+
+.flex.justify-center {
+    justify-content: center;
+}
+
+.flex.wrap {
+    flex-wrap: wrap;
+}
+
+
+/* list-helpers */
+
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
