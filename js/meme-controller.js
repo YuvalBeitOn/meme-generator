@@ -92,16 +92,16 @@ function renderEditor() {
     <button onclick="handleDeleteLine()"><img src="img/icons/trash.png" alt=""></button>
     </div>
     <div class="text-controls">
-    <button onclick="handleFontSize(${3})"><img src="/img/icons/increase.png" alt=""></button>
-    <button onclick="handleFontSize(${-3})"><img src="/img/icons/decrease.png" alt=""></button>
-    <button onclick="handleTextAlign('right')"><img src="/img/icons/align-left.png" alt=""></button>
-    <button onclick="handleTextAlign('left')"><img src="/img/icons/align-right.png" alt=""></button>
-    <button onclick="handleTextAlign('center')"><img src="/img/icons/center-text.png" alt=""></button>
+    <button onclick="handleFontSize(${3})"><img src="img/icons/increase.png" alt=""></button>
+    <button onclick="handleFontSize(${-3})"><img src="img/icons/decrease.png" alt=""></button>
+    <button onclick="handleTextAlign('right')"><img src="img/icons/align-left.png" alt=""></button>
+    <button onclick="handleTextAlign('left')"><img src="img/icons/align-right.png" alt=""></button>
+    <button onclick="handleTextAlign('center')"><img src="img/icons/center-text.png" alt=""></button>
     </div>
     <div class="colors-controls">
-    <label for="fill-color"><img src="/img/icons/color.png" alt=""></img></label>
+    <label for="fill-color"><img src="img/icons/color.png" alt=""></img></label>
     <input onchange="handleFillColor()" type="color" id="fill-color" value="#000000">
-    <label for="stroke-color"><img src="/img/icons/text-stroke.png" alt=""></label>
+    <label for="stroke-color"><img src="img/icons/text-stroke.png" alt=""></label>
     <input onchange="handleStrokeColor()" type="color" id="stroke-color" value="#000000">
     </div>
             <div class="actions">
