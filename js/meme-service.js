@@ -1,46 +1,165 @@
 'use strict';
 
-var gKeywords = { 'happy': 12, 'funny puk': 1 }
+var gKeywords = { 'happy': 0, 'angry': 0, 'baby': 0, 'dog': 0, 'sad': 0, 'putin': 0, 'funny': 0, 'cute': 0, 'kiss': 0, 'animal': 0 };
 var gColor = '#000000';
+var gFilter = '';
 
-const gImgs = [
-    { id: 1, url: 'img/1.jpg', keywords: ['happy'] },
-    { id: 2, url: 'img/2.jpg', keywords: ['happy'] },
-    { id: 3, url: 'img/3.jpg', keywords: ['happy'] },
-    { id: 4, url: 'img/5.jpg', keywords: ['happy'] },
-    { id: 5, url: 'img/6.jpg', keywords: ['happy'] },
-    { id: 6, url: 'img/7.jpg', keywords: ['happy'] },
-    { id: 7, url: 'img/8.jpg', keywords: ['happy'] },
-    { id: 8, url: 'img/9.jpg', keywords: ['happy'] },
-    { id: 9, url: 'img/10.jpg', keywords: ['happy'] },
-    { id: 10, url: 'img/11.jpg', keywords: ['happy'] },
-    { id: 11, url: 'img/12.jpg', keywords: ['happy'] },
-    { id: 12, url: 'img/13.jpg', keywords: ['happy'] },
-    { id: 13, url: 'img/14.jpg', keywords: ['happy'] },
-    { id: 14, url: 'img/15.jpg', keywords: ['happy'] },
-    { id: 15, url: 'img/16.jpg', keywords: ['happy'] },
-    { id: 16, url: 'img/17.jpg', keywords: ['happy'] },
-    { id: 17, url: 'img/18.jpg', keywords: ['happy'] },
-    { id: 18, url: 'img/4.jpg', keywords: ['happy'] },
+var gImgs = [{
+        id: 0,
+        url: 'img/1.jpg',
+        keywords: ['trump', 'angry', 'funny']
+    },
+    {
+        id: 1,
+        url: 'img/2.jpg',
+        keywords: ['cute', 'dog', 'kiss', 'animal']
+    },
+    {
+        id: 2,
+        url: 'img/3.jpg',
+        keywords: ['cute', 'dog', 'baby', 'sleep', 'animal']
+    },
+    {
+        id: 3,
+        url: 'img/4.jpg',
+        keywords: ['cute', 'cat', 'sleep', 'tired', 'animal']
+    },
+    {
+        id: 4,
+        url: 'img/5.jpg',
+        keywords: ['funny', 'cute', 'baby', 'strong']
+    },
+    {
+        id: 5,
+        url: 'img/6.jpg',
+        keywords: ['funny']
+    },
+    {
+        id: 6,
+        url: 'img/7.jpg',
+        keywords: ['cute', 'baby']
+    },
+    {
+        id: 7,
+        url: 'img/8.jpg',
+        keywords: ['funny', 'willi wonka']
+    },
+    {
+        id: 8,
+        url: 'img/9.jpg',
+        keywords: ['funny', 'cute', 'baby', 'happy']
+    },
+    {
+        id: 9,
+        url: 'img/10.jpg',
+        keywords: ['funny', 'barak obama', 'laugh', 'happy']
+    },
+    {
+        id: 10,
+        url: 'img/11.jpg',
+        keywords: ['funny', 'romantic', 'gay', 'sport']
+    },
+    {
+        id: 11,
+        url: 'img/12.jpg',
+        keywords: ['oops', 'chaim hecht']
+    },
+    {
+        id: 12,
+        url: 'img/13.jpg',
+        keywords: ['cheers', 'satisfied', 'rich']
+    },
+    {
+        id: 13,
+        url: 'img/14.jpg',
+        keywords: ['movie', 'bad', 'funny']
+    },
+    {
+        id: 14,
+        url: 'img/15.jpg',
+        keywords: ['expla', 'funny']
+    },
+    {
+        id: 15,
+        url: 'img/16.jpg',
+        keywords: ['funny', 'embarrassed']
+    },
+    {
+        id: 16,
+        url: 'img/17.jpg',
+        keywords: ['putin', 'two']
+    },
+    {
+        id: 17,
+        url: 'img/18.jpg',
+        keywords: ['toy', 'scary']
+    },
 
-];
+]
 
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [{
-        txt: '',
-        size: 48,
-        align: 'center',
-        fill: 'white',
-        stroke: 'black',
-        position: {}
-    }]
+            txt: 'Type here',
+            size: 48,
+            align: 'center',
+            fill: 'white',
+            stroke: 'black',
+            position: { x: 0, y: 100 }
+        },
+        {
+            txt: 'Type here',
+            size: 48,
+            align: 'center',
+            fill: 'white',
+            stroke: 'black',
+            position: { x: 0, y: 200 }
+        }
+    ]
 }
 
-function setColor(color) {
-    gMeme.lines[gMeme.selectedLineIdx].fill = color;
-    gMeme.lines[gMeme.selectedLineIdx].stroke = color;
+function setCanvasSizes(width) {
+    gMeme.lines.forEach(line => {
+        line.position.x = width / 2;
+    });
+}
+
+function setFilter(value) {
+    gFilter = value;
+}
+
+function searchKeyWords() {
+    let filteredImgs = gImgs.filter((img) => {
+        if (img.keywords.some(word => {
+                if (word.startsWith(gFilter)) return word
+            }))
+            return img;
+    });
+    return filteredImgs;
+}
+
+
+function getXPos() {
+    return gMeme.lines[gMeme.selectedLineIdx].position.x;
+}
+
+function getYPos() {
+    return gMeme.lines[gMeme.selectedLineIdx].position.y;
+}
+
+function setLinePos(diff) {
+    console.log(gMeme.lines[gMeme.selectedLineIdx].position.y + diff);
+    return gMeme.lines[gMeme.selectedLineIdx].position.y += diff;
+}
+
+
+function setFillColor(fillColor) {
+    gMeme.lines[gMeme.selectedLineIdx].fill = fillColor;
+}
+
+function setStrokeColor(strokeColor) {
+    gMeme.lines[gMeme.selectedLineIdx].stroke = strokeColor;
 }
 
 
@@ -62,17 +181,18 @@ function addTextLine() {
         size: 48,
         align: 'center',
         fill: 'white',
-        stroke: 'black'
+        stroke: 'black',
+        position: { x: 250, y: (gMeme.lines[gMeme.lines.length - 1].position.y) + 100 }
     }
-    if (gMeme.lines.length <= 1) gMeme.lines.push(newLine);
+    gMeme.lines.push(newLine);
     gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 
-function setSelectedLine() {
-    let currLine = gMeme.selectedLineIdx;
-    if (currLine === 0) currLine = 1;
-    else currLine = 0;
-    gMeme.selectedLineIdx = currLine;
+function setSelectedLine(diff) {
+    if (gMeme.selectedLineIdx + diff >= gMeme.lines.length) {
+        gMeme.selectedLineIdx = -1;
+    }
+    return gMeme.selectedLineIdx += +diff;
 }
 
 function getSelectedImgId() {
@@ -80,6 +200,7 @@ function getSelectedImgId() {
 }
 
 function getImgs() {
+    if (gFilter) return searchKeyWords();
     return gImgs;
 }
 
@@ -90,12 +211,12 @@ function getImgById(imgId) {
     return img;
 }
 
-function setText(txt) {
-    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
-}
-
 function getLines() {
     return gMeme.lines;
+}
+
+function setText(txt) {
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
 }
 
 function setSelectedImgId(imgId) {

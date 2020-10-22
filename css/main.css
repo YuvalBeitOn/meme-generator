@@ -2,7 +2,7 @@
 @import "/css/gallery.css";
 * {
     box-sizing: border-box;
-    /* border: 1px solid black; */
+    font-family: monts;
 }
 
 @font-face {
@@ -18,27 +18,40 @@ body {
 
 header {
     height: 4.12rem;
-    padding: 0 3.125rem 0 3.125rem;
-    margin-bottom: 1.625rem;
-    background-color: #ff7f00;
+    background-color: #f7caca;
+}
+
+button,
+input {
+    cursor: pointer;
 }
 
 nav {
-    font-family: monts;
     font-size: 1.187rem;
 }
 
 .nav-link {
     text-decoration: none;
     color: white;
+    cursor: pointer;
 }
 
 .nav-link:not(:last-child):after {
     content: ' |';
+    color: white;
+}
+
+.nav-link:hover {
+    color: rgba(192, 181, 181, 0.678);
+}
+
+.nav-link.marked {
+    color: gray;
 }
 
 .logo {
     width: 8.312rem;
+    cursor: pointer;
 }
 
 .about {
@@ -46,8 +59,17 @@ nav {
 }
 
 .main-footer {
-    background-color: #ff7f00;
-    height: 13rem;
+    background-color: #f7caca;
+    height: 6rem;
+}
+
+.search-meme {
+    font-size: 1.2rem;
+    font-family: 'monts';
+    outline: none;
+    border: 0;
+    border-bottom: 2px solid black;
+    width: 10rem;
 }
 
 
@@ -73,6 +95,10 @@ nav {
     flex-wrap: wrap;
 }
 
+.container {
+    padding: 0 3.125rem 0 3.125rem;
+}
+
 
 /* list-helpers */
 
@@ -80,4 +106,10 @@ nav {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 0 1.5rem 0 1.5rem;
+    }
 }

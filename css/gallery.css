@@ -1,25 +1,32 @@
-.filters {
+.filters-container {
     height: 6.25rem;
+    background-color: white;
+    margin-bottom: 1rem;
+}
+
+.filters {
+    height: 100%;
 }
 
 .img-gallery {
     width: 100%;
-    padding: 3.125rem;
+    justify-content: center;
 }
 
 .img-gallery .gallery-item {
     display: inline-block;
-    margin: 0.5rem;
-    padding: 1rem;
+    margin: 0.8rem;
 }
 
 .img-gallery img {
     display: block;
-    width: 353px;
+    width: 15rem;
+    border-radius: 20px;
 }
 
 .img-gallery img:hover {
     cursor: pointer;
+    transform: scale(1.05);
+    transition: .6s;
+    border: 1.5px solid rgba(128, 128, 128, 0.658);
 }
-
-.search-meme {}

@@ -5,24 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme-generator</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/editor.css">
 </head>
 
 <body onload="init()">
-    <header class="flex space-between align-center">
-        <img class="logo" src="img/logo.png" alt="" />
+    <header class="flex space-between align-center container">
+        <img onclick="renderGallery()" class="logo" src="img/logo.png" alt="" />
         <nav>
-            <a class="nav-link" href="">Gallery</a>
-            <a class="nav-link" href="">About</a>
+            <span onclick="renderGallery()" class="nav-link marked">Gallery</span>
+            <span onclick="scrollToAbout()" class="nav-link">About</span>
         </nav>
     </header>
-    <div class="content">
+    <div class="main-container">
         <!-- RENDERED FROM JS  -->
     </div>
 
-    <footer class="main-footer"></footer>
+    <footer class="main-footer flex justify-center align-center">
+        <small>© 2020 Coffee-Rights</small>
+    </footer>
+
     <script src="js/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>
+    <script src="js/upload.js"></script>
+
+
 
 </body>
 

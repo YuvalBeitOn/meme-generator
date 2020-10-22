@@ -5,9 +5,9 @@
 }
 
 canvas {
+    width: 100%;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     display: block;
-    background-color: rgb(228, 218, 218);
     border-radius: 5px;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.767);
 }
@@ -15,14 +15,76 @@ canvas {
 .editor-controls {
     width: 50%;
     margin-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
 }
 
 .editor-controls img {
-    width: 25px;
+    width: 40px;
+}
+
+.editor-controls button {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin: 0.3rem;
 }
 
 .editor {
-    height: 37.5rem;
     padding: 0 3.125rem 0 3.125rem;
-    margin-bottom: 1.4rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
+
+.text-input {
+    width: 100%;
+    font-size: 1.5rem;
+    border-radius: 12px;
+    padding: 1rem;
+    outline: none;
+    border: none;
+}
+
+#fill-color,
+#stroke-color {
+    visibility: hidden;
+    width: 0px;
+    padding: 0;
+    margin: 0;
+}
+
+.fa-icon {
+    color: black;
+    background-color: transparent;
+    font-size: 45px;
+    border-radius: 5px;
+}
+
+.colors-controls {
+    position: relative;
+}
+
+.save-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.3rem;
+}
+
+@media (max-width: 850px) {
+    .editor {
+        flex-wrap: wrap;
+    }
+    .editor-controls {
+        width: 100%;
+        margin: 0;
+        margin-top: 1rem;
+    }
+    .canvas-container {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 400px) {}
