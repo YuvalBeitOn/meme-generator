@@ -30,3 +30,13 @@
     transition: .6s;
     border: 1.5px solid rgba(128, 128, 128, 0.658);
 }
+
+.keywords {
+    width: 40%;
+    cursor: pointer;
+}
+
+.search-icon {
+    width: 1rem;
+    cursor: pointer;
+}

@@ -62,18 +62,42 @@ function scrollToAbout() {
     window.scrollTo(options);
 }
 
+function renderKeywordList() {
+    var elKeywords = document.querySelector('.keywords');
+    let words = getPopularKeywords();
+    let strHtml = words.map(word => {
+        return `<span onclick="handleFilterKeyWord('${word.keyword}')" style="font-size: ${word.count}px">${word.keyword}</span>`
+    }).join('');
+    console.log(strHtml);
+    elKeywords.innerHTML = strHtml;
+}
+
 function renderGallery() {
     const strHtml = `<main> 
     <section class="filters-container">
     <div class="filters container flex space-between align-center">
-    <input onkeyup="onSearchKeyWord(this.value)" class="search-meme" type="text" placeholder="Search keyword">
-    <div class="keywords">words</div>
+    <div>
+    <input onkeyup="handleFilterKeyWord(this.value)" class="search-meme" type="text" placeholder="Search keyword">
+    <img class="search-icon" src="img/icons/search-icon.png" alt="">
+    </div>
+    <div class="keywords flex space-between align-center"></div>
     </div>
     </section>
     <div class="img-gallery flex wrap"></div>
-    <section class="about"></section> <main/>`;
+    <section class="about flex space-between align-center">
+    <img class="me-img" src="img/me.png">
+    <div class="about-content flex column wrap">
+    <h3>Yuval Beit On</h3>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae vel saepe dolore temporibus necessitatibus aliquid praesentium explicabo, sed laboriosam.</p>
+    <ul class="social-icons clean-list flex justify-center wrap">
+    <img class="about-icon" src="img/icons/github-logo.png" alt="">
+    <img class="about-icon"  src="img/icons/facebook-logo.png" alt="">
+    </ul>
+</div>
+    </section> <main/>`;
     document.querySelector('.main-container').innerHTML = strHtml;
     renderImgsList();
+    renderKeywordList();
 }
 
 function renderEditor() {
@@ -103,6 +127,13 @@ function renderEditor() {
     <input onchange="handleFillColor()" type="color" id="fill-color" value="#000000">
     <label for="stroke-color"><img src="img/icons/text-stroke.png" alt=""></label>
     <input onchange="handleStrokeColor()" type="color" id="stroke-color" value="#000000">
+    <select id="font" onchange="handleFontFamily(this.value)">
+            <option value="impact">Impact</option>
+            <option value="helvetica">Helvetica</option>
+            <option value="verdana">Verdana</option>
+            <option value="serif">Serif</option>
+            <option value="cursive">Cursive</option>
+        </select>
     </div>
             <div class="actions">
             <button class="save-btn" onclick="saveCanvas()">Save</button>
@@ -121,15 +152,22 @@ function renderEditor() {
 
 /**** event handlers *****/
 
-function onSearchKeyWord(value) {
+function handleFontFamily(font) {
+    console.log(font);
+    setFontFamily(font)
+    drawText();
+}
+
+function handleFilterKeyWord(value) {
     setFilter(value);
-    renderImgsList()
+    document.querySelector('.search-meme').value = value;
+    renderImgsList();
 }
 
 
 function handleChangeLinePos(diff) {
     setLinePos(diff)
-    drawText()
+    drawText();
 }
 
 function handleStrokeColor() {
@@ -146,6 +184,7 @@ function handleFillColor() {
 
 function handleAddLine() {
     addTextLine();
+    setCanvasSizes(gCanvas.width);
     drawText();
 }
 
@@ -206,7 +245,7 @@ function drawText() {
     drawImg();
     markSelectedText();
     lines.forEach((line) => {
-        gCtx.font = `${line.size}px Impact`;
+        gCtx.font = `${line.size}px ${line.font}`;
         gCtx.textAlign = line.align;
         gCtx.lineWidth = '2';
         gCtx.strokeStyle = line.stroke;

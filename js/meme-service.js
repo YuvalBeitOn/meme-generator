@@ -1,6 +1,6 @@
 'use strict';
 
-var gKeywords = { 'happy': 0, 'angry': 0, 'baby': 0, 'dog': 0, 'sad': 0, 'putin': 0, 'funny': 0, 'cute': 0, 'kiss': 0, 'animal': 0 };
+var gKeywords = { 'happy': 0, 'angry': 0, 'baby': 0, 'dog': 0, 'putin': 0, 'funny': 0, 'cute': 0, 'kiss': 0, 'animal': 0 };
 var gColor = '#000000';
 var gFilter = '';
 
@@ -77,7 +77,7 @@ var gImgs = [{
     {
         id: 14,
         url: 'img/15.jpg',
-        keywords: ['expla', 'funny']
+        keywords: ['explain', 'funny']
     },
     {
         id: 15,
@@ -97,31 +97,37 @@ var gImgs = [{
 
 ]
 
+
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [{
             txt: 'Type here',
+            font: 'impact',
             size: 48,
             align: 'center',
             fill: 'white',
             stroke: 'black',
-            position: { x: 0, y: 100 }
+            position: { x: 0, y: 0 }
         },
         {
             txt: 'Type here',
+            font: 'impact',
             size: 48,
             align: 'center',
             fill: 'white',
             stroke: 'black',
-            position: { x: 0, y: 200 }
+            position: { x: 0, y: 0 }
         }
     ]
 }
 
 function setCanvasSizes(width) {
-    gMeme.lines.forEach(line => {
+    gMeme.lines.forEach((line, idx) => {
         line.position.x = width / 2;
+        if (idx === 0) line.position.y = width / 4;
+        else if (idx === 1) line.position.y = width - (width / 4) + line.size;
+        else line.position.y = width / 2 + line.size / 2;
     });
 }
 
@@ -129,7 +135,29 @@ function setFilter(value) {
     gFilter = value;
 }
 
-function searchKeyWords() {
+function countKeywords(keyword) {
+    let count = 0;
+    gImgs.forEach(img => {
+        img.keywords.forEach(currWord => {
+            if (currWord === keyword) count++;
+        });
+    });
+    return count;
+}
+
+function getPopularKeywords() {
+    let keywordsArray = [];
+    for (let keyword in gKeywords) {
+        let count = countKeywords(keyword);
+        keywordsArray.push({ keyword, count: count + 15 });
+    }
+    keywordsArray.sort((a, b) => b.count - a.count);
+    console.log(keywordsArray);
+    return keywordsArray.slice(0, 6);
+}
+
+
+function filterImgByKeyword() {
     let filteredImgs = gImgs.filter((img) => {
         if (img.keywords.some(word => {
                 if (word.startsWith(gFilter)) return word
@@ -137,15 +165,6 @@ function searchKeyWords() {
             return img;
     });
     return filteredImgs;
-}
-
-
-function getXPos() {
-    return gMeme.lines[gMeme.selectedLineIdx].position.x;
-}
-
-function getYPos() {
-    return gMeme.lines[gMeme.selectedLineIdx].position.y;
 }
 
 function setLinePos(diff) {
@@ -160,6 +179,10 @@ function setFillColor(fillColor) {
 
 function setStrokeColor(strokeColor) {
     gMeme.lines[gMeme.selectedLineIdx].stroke = strokeColor;
+}
+
+function setFontFamily(font) {
+    gMeme.lines[gMeme.selectedLineIdx].font = font;
 }
 
 
@@ -200,7 +223,7 @@ function getSelectedImgId() {
 }
 
 function getImgs() {
-    if (gFilter) return searchKeyWords();
+    if (gFilter) return filterImgByKeyword();
     return gImgs;
 }
 
