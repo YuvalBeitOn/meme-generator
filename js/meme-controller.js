@@ -85,11 +85,11 @@ function renderEditor() {
     <div class="editor-controls">
     <input class="text-input" onkeyup="handleTextChange(event)" type="text" placeholder="Enter text here">
     <div class="btns-container">
-    <button onClick="handleChangeLine(${1})"><img src="/img/icons/up-down.png" alt=""></button>
+    <button onClick="handleChangeLine(${1})"><img src="img/icons/up-down.png" alt=""></button>
     <button onClick="handleChangeLinePos(${-3})"><i class="fas fa-arrow-up fa-icon"></i></button>
     <button onClick="handleChangeLinePos(${3})"><i class="fas fa-arrow-down fa-icon"></i></button>
-    <button onclick="handleAddLine()"><img src="/img/icons/add.png" alt=""></button>
-    <button onclick="handleDeleteLine()"><img src="/img/icons/trash.png" alt=""></button>
+    <button onclick="handleAddLine()"><img src="img/icons/add.png" alt=""></button>
+    <button onclick="handleDeleteLine()"><img src="img/icons/trash.png" alt=""></button>
     </div>
     <div class="text-controls">
     <button onclick="handleFontSize(${3})"><img src="/img/icons/increase.png" alt=""></button>

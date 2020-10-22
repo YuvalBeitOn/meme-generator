@@ -1,3 +1,9 @@
+.editor {
+    padding: 0 3.125rem 0 3.125rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
 .canvas-container {
     width: 50%;
     position: relative;
@@ -30,12 +36,6 @@ canvas {
     border: none;
     border-radius: 5px;
     margin: 0.3rem;
-}
-
-.editor {
-    padding: 0 3.125rem 0 3.125rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
 }
 
 .text-input {
