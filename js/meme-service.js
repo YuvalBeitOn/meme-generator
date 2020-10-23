@@ -1,8 +1,11 @@
 'use strict';
 
+const STORAGE_KEY = 'memes'
 var gKeywords = { 'happy': 0, 'angry': 0, 'baby': 0, 'dog': 0, 'putin': 0, 'funny': 0, 'cute': 0, 'kiss': 0, 'animal': 0 };
 var gColor = '#000000';
 var gFilter = '';
+var gSavedMems = [];
+
 
 var gImgs = [{
         id: 0,
@@ -97,6 +100,16 @@ var gImgs = [{
 
 ]
 
+var gStickers = [
+    { id: 1, url: 'stickers/animal.png' },
+    { id: 2, url: 'stickers/boy.png' },
+    { id: 3, url: 'stickers/cat.png' },
+    { id: 4, url: 'stickers/crab.png' },
+    { id: 5, url: 'stickers/princess.png' },
+    { id: 6, url: 'stickers/rainbow.png' }
+]
+
+
 
 var gMeme = {
     selectedImgId: 1,
@@ -122,6 +135,53 @@ var gMeme = {
     ]
 }
 
+/***** keywords functions *****/
+
+
+function countKeywords(keyword) {
+    let count = 0;
+    gImgs.forEach(img => {
+        img.keywords.forEach(currWord => {
+            if (currWord === keyword) count++;
+        });
+    });
+    return count;
+}
+
+function filterImgByKeyword() {
+    let filteredImgs = gImgs.filter((img) => {
+        if (img.keywords.some(word => {
+                if (word.startsWith(gFilter)) return word
+            }))
+            return img;
+    });
+    return filteredImgs;
+}
+
+/***** add and delete functions *****/
+
+function addTextLine() {
+    let newLine = {
+        txt: '',
+        size: 48,
+        align: 'center',
+        fill: 'white',
+        stroke: 'black',
+        position: { x: 250, y: (gMeme.lines[gMeme.lines.length - 1].position.y) + 100 }
+    }
+    gMeme.lines.push(newLine);
+    gMeme.selectedLineIdx = gMeme.lines.length - 1;
+}
+
+function deleteLine() {
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1);
+    gMeme.selectedLineIdx = 0;
+}
+
+
+/***** set functions *****/
+
+
 function setCanvasSizes(width) {
     gMeme.lines.forEach((line, idx) => {
         line.position.x = width / 2;
@@ -135,40 +195,7 @@ function setFilter(value) {
     gFilter = value;
 }
 
-function countKeywords(keyword) {
-    let count = 0;
-    gImgs.forEach(img => {
-        img.keywords.forEach(currWord => {
-            if (currWord === keyword) count++;
-        });
-    });
-    return count;
-}
-
-function getPopularKeywords() {
-    let keywordsArray = [];
-    for (let keyword in gKeywords) {
-        let count = countKeywords(keyword);
-        keywordsArray.push({ keyword, count: count + 15 });
-    }
-    keywordsArray.sort((a, b) => b.count - a.count);
-    console.log(keywordsArray);
-    return keywordsArray.slice(0, 6);
-}
-
-
-function filterImgByKeyword() {
-    let filteredImgs = gImgs.filter((img) => {
-        if (img.keywords.some(word => {
-                if (word.startsWith(gFilter)) return word
-            }))
-            return img;
-    });
-    return filteredImgs;
-}
-
 function setLinePos(diff) {
-    console.log(gMeme.lines[gMeme.selectedLineIdx].position.y + diff);
     return gMeme.lines[gMeme.selectedLineIdx].position.y += diff;
 }
 
@@ -191,24 +218,10 @@ function setfontSize(num) {
     if (currFontSize + num > 80 || currFontSize < 40) return;
     currFontSize = currFontSize + num;
     gMeme.lines[gMeme.selectedLineIdx].size = currFontSize;
-    console.log(currFontSize);
 }
 
 function setTextAlign(align) {
     gMeme.lines[gMeme.selectedLineIdx].align = align;
-}
-
-function addTextLine() {
-    let newLine = {
-        txt: '',
-        size: 48,
-        align: 'center',
-        fill: 'white',
-        stroke: 'black',
-        position: { x: 250, y: (gMeme.lines[gMeme.lines.length - 1].position.y) + 100 }
-    }
-    gMeme.lines.push(newLine);
-    gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 
 function setSelectedLine(diff) {
@@ -216,6 +229,35 @@ function setSelectedLine(diff) {
         gMeme.selectedLineIdx = -1;
     }
     return gMeme.selectedLineIdx += +diff;
+}
+
+function setSelectedImgId(imgId) {
+    gMeme.selectedImgId = imgId;
+}
+
+
+
+/***** get functions *****/
+
+function getStickers() {
+    return gStickers;
+}
+
+function getStickerById(stickerId) {
+    const sticker = gStickers.find(sticker => {
+        return stickerId === sticker.id;
+    })
+    return sticker;
+}
+
+function getPopularKeywords() {
+    let keywordsArray = [];
+    for (let keyword in gKeywords) {
+        let count = countKeywords(keyword);
+        keywordsArray.push({ keyword, count: count + 15 });
+    }
+    keywordsArray.sort((a, b) => b.count - a.count);
+    return keywordsArray.slice(0, 6);
 }
 
 function getSelectedImgId() {
@@ -238,19 +280,21 @@ function getLines() {
     return gMeme.lines;
 }
 
-function setText(txt) {
-    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
-}
-
-function setSelectedImgId(imgId) {
-    gMeme.selectedImgId = imgId;
-}
-
 function getSelectedLine() {
     return gMeme.lines[gMeme.selectedLineIdx];
 }
 
-function deleteLine() {
-    gMeme.lines.splice(gMeme.selectedLineIdx, 1);
-    gMeme.selectedLineIdx = 0;
+function setText(txt) {
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
+}
+
+/**** local storage ****/
+
+function getSaveCanvas() {
+    const datas = loadFromStorage(STORAGE_KEY);
+    return datas.map((data) => {
+        let img = new Image;
+        img.src = data;
+        return img;
+    })
 }

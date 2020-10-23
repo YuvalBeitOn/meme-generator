@@ -58,7 +58,7 @@ canvas {
 .fa-icon {
     color: black;
     background-color: transparent;
-    font-size: 45px;
+    font-size: 40px;
     border-radius: 5px;
 }
 
@@ -70,6 +70,23 @@ canvas {
     font-size: 1.5rem;
     font-weight: bold;
     padding: 0.3rem;
+}
+
+#font {
+    position: absolute;
+    top: 10px;
+    left: 100px;
+}
+
+.stickers {
+    width: 25rem;
+    overflow: auto;
+}
+
+.stickers img {
+    width: 80px;
+    padding: 0.5rem;
+    cursor: pointer;
 }
 
 @media (max-width: 850px) {
@@ -87,4 +104,32 @@ canvas {
     }
 }
 
-@media (max-width: 400px) {}
+@media (max-width: 470px) {
+    .fa-icon {
+        font-size: 30px;
+    }
+    .editor-controls img {
+        width: 30px;
+    }
+    .text-input {
+        font-size: 1rem;
+    }
+    #font {
+        position: unset;
+    }
+}
+
+@media (max-width: 400px) {
+    .fa-icon {
+        font-size: 25px;
+    }
+    .editor-controls img {
+        width: 25px;
+    }
+    .text-input {
+        font-size: 0.8rem;
+    }
+    #font {
+        position: unset;
+    }
+}

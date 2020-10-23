@@ -34,10 +34,11 @@ nav {
     cursor: pointer;
 }
 
-.nav-link:not(:last-child):after {
+
+/* .nav-link:not(:last-child):after {
     content: ' |';
     color: white;
-}
+} */
 
 .nav-link:hover {
     color: rgba(192, 181, 181, 0.678);
@@ -122,8 +123,31 @@ nav {
     padding: 0;
 }
 
-@media (max-width: 600px) {
-    .container {
-        padding: 0 1.5rem 0 1.5rem;
+@media (max-width: 980px) {
+    .filters {
+        flex-direction: column;
+        justify-content: center!important;
+    }
+    .keyword {
+        padding: 0.5rem;
+        font-size: 3rem;
+    }
+    .keywords {
+        width: 100%!important;
+        justify-content: center!important;
+    }
+    .search-meme {
+        margin-top: 1rem;
     }
 }
+
+@media (max-width: 850px) {
+    .about {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 850px) {}

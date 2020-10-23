@@ -40,3 +40,22 @@
     width: 1rem;
     cursor: pointer;
 }
+
+@media (max-width: 560px) {
+    .img-gallery .gallery-item {
+        width: 80%;
+    }
+}
+
+@media (max-width: 460px) {
+    .keywords {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .nav-link {
+        font-size: 1rem;
+        margin-left: 1.5rem;
+    }
+}

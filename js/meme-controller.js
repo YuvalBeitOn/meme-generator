@@ -11,6 +11,19 @@ function init() {
 
 }
 
+function initEditor() {
+    gCanvas = document.querySelector('#canvas');
+    gCtx = gCanvas.getContext('2d');
+    resizeCanvas();
+}
+
+function getCanvas() {
+    return gCanvas;
+}
+
+
+/***** render functions *****/
+
 function renderImgsList() {
     const imgs = getImgs();
     var strHtml = imgs.map((img) => {
@@ -21,54 +34,12 @@ function renderImgsList() {
     elGallery.innerHTML = strHtml;
 }
 
-function initEditor() {
-    gCanvas = document.querySelector('#canvas');
-    gCtx = gCanvas.getContext('2d');
-    resizeCanvas();
-}
-
-function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas-container');
-    gCanvas.width = elContainer.offsetWidth;
-    gCanvas.height = gCanvas.width;
-    setCanvasSizes(gCanvas.width);
-    drawImg();
-    drawText();
-}
-
-function resizeEditor() {
-    const elEditor = document.querySelector('.editor-controls');
-    elEditor.style.height = gCanvas.height + 'px';
-}
-
-function toggleActiceNav() {
-    var els = document.querySelectorAll('.nav-link');
-    console.log(els);
-    els.forEach(element => {
-        if (element.className.includes('marked')) element.className = 'nav-link';
-        else element.className = 'nav-link marked';
-    });
-}
-
-function scrollToAbout() {
-    const elTarget = document.querySelector('.about');
-    var pos = elTarget.getBoundingClientRect();
-    var options = {
-        top: pos.y,
-        left: 0,
-        behavior: 'smooth'
-    }
-    console.log(pos);
-    window.scrollTo(options);
-}
-
 function renderKeywordList() {
     var elKeywords = document.querySelector('.keywords');
     let words = getPopularKeywords();
     let strHtml = words.map(word => {
-        return `<span onclick="handleFilterKeyWord('${word.keyword}')" style="font-size: ${word.count}px">${word.keyword}</span>`
+        return `<span class="keyword" onclick="handleFilterKeyWord('${word.keyword}')" style="font-size: ${word.count}px">${word.keyword}</span>`
     }).join('');
-    console.log(strHtml);
     elKeywords.innerHTML = strHtml;
 }
 
@@ -139,21 +110,66 @@ function renderEditor() {
             <button class="save-btn" onclick="saveCanvas()">Save</button>
             <a href="#" onclick="downloadCanvas(this)"><i class="fas fa-download fa-icon"></i></a>
             </div>
-            </div>
+            <div class="stickers flex"></div>
             </div>
             </main>`
     document.querySelector('.main-container').innerHTML = strHtml;
     initEditor();
     drawImg();
     drawText();
+    // renderStickers();
 }
 
+function renderStickers() {
+    const stickers = getStickers();
+    var strHtml = stickers.map((sticker) => {
+        return `<img class="sticker" onclick="drawSticker(${sticker.id})" src="${sticker.url}" alt="${sticker.id}"/>
+        `
+    }).join('');
+    const elStickers = document.querySelector('.stickers');
+    elStickers.innerHTML = strHtml;
+}
+
+/***** resize functions *****/
+
+
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container');
+    gCanvas.width = elContainer.offsetWidth;
+    gCanvas.height = gCanvas.width;
+    setCanvasSizes(gCanvas.width);
+    drawImg();
+    drawText();
+}
+
+function resizeEditor() {
+    const elEditor = document.querySelector('.editor-controls');
+    elEditor.style.height = gCanvas.height + 'px';
+}
+
+function toggleActiceNav() {
+    var els = document.querySelectorAll('.nav-link');
+    els.forEach(element => {
+        if (element.className.includes('marked')) element.className = 'nav-link';
+        else element.className = 'nav-link marked';
+    });
+}
+
+function scrollToAbout() {
+    const elTarget = document.querySelector('.about');
+    var pos = elTarget.getBoundingClientRect();
+    var options = {
+        top: pos.y,
+        left: 0,
+        behavior: 'smooth'
+    }
+    window.scrollTo(options);
+}
 
 
 /**** event handlers *****/
 
 function handleFontFamily(font) {
-    console.log(font);
     setFontFamily(font)
     drawText();
 }
@@ -210,7 +226,6 @@ function handleTextAlign(align) {
 }
 
 function handleTextChange(ev) {
-    console.log(ev.target.value);
     setText(ev.target.value);
     drawText();
 }
@@ -255,6 +270,14 @@ function drawText() {
     });
 }
 
+function drawSticker(stickerId) {
+    console.log(stickerId);
+    const currSticker = getStickerById(stickerId);
+    const sticker = new Image()
+    sticker.src = currSticker.url;
+    gCtx.drawImage(sticker, 0, 0, 100, 100);
+}
+
 function downloadCanvas(elLink) {
     const data = gCanvas.toDataURL();
     elLink.href = data;
@@ -262,5 +285,8 @@ function downloadCanvas(elLink) {
 }
 
 function saveCanvas() {
-    gCtx.save()
+    const canvas = getCanvas();
+    gSavedMems.push(canvas.toDataURL());
+    saveToStorage(STORAGE_KEY, gSavedMems)
+    console.log(gSavedMems);
 }
