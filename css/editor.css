@@ -105,11 +105,14 @@ canvas {
 }
 
 @media (max-width: 470px) {
+    .editor {
+        padding: 0 1rem 0 1rem;
+    }
     .fa-icon {
         font-size: 30px;
     }
     .editor-controls img {
-        width: 30px;
+        width: 35px;
     }
     .text-input {
         font-size: 1rem;
