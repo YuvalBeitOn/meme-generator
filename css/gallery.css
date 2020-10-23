@@ -56,9 +56,14 @@
     }
 }
 
+@media (max-width: 440px) {
+    nav {
+        font-size: 1rem!important;
+    }
+}
+
 @media (max-width: 400px) {
-    .nav-link {
-        font-size: 1rem;
-        margin-left: 1.5rem;
+    nav {
+        margin-left: 2rem;
     }
 }

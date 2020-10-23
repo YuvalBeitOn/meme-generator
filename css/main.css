@@ -32,13 +32,8 @@ nav {
     text-decoration: none;
     color: white;
     cursor: pointer;
+    padding: 0.5rem;
 }
-
-
-/* .nav-link:not(:last-child):after {
-    content: ' |';
-    color: white;
-} */
 
 .nav-link:hover {
     color: rgba(192, 181, 181, 0.678);
@@ -149,5 +144,3 @@ nav {
         margin-top: 30px;
     }
 }
-
-@media (max-width: 850px) {}
