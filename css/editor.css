@@ -72,13 +72,38 @@ canvas {
 
 .save-btn,
 .done-btn {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     padding: 0.3rem;
 }
 
+.fb-btn {
+    box-shadow: none!important;
+}
+
+form {
+    position: relative;
+}
+
+.a-btn {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.3rem;
+    right: 15px;
+}
+
+.fb {
+    font-size: 54px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: ;
+}
+
 #font {
     font-size: 1.5rem;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.767);
+    border: none;
+    border-radius: 5px;
 }
 
 .stickers {
@@ -90,10 +115,6 @@ canvas {
     width: 80px;
     padding: 0.5rem;
     cursor: pointer;
-}
-
-.actions>* {
-    margin: 1rem
 }
 
 @media (max-width: 850px) {

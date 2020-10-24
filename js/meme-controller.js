@@ -111,8 +111,15 @@ function renderEditor() {
     <div class="actions">
     <button class="done-btn" onclick="doneCanvas()">Done</button>
     <button class="save-btn" onclick="saveCanvas()">Save</button>
-    <a href="#" onclick="downloadCanvas(this)"><i class="fas fa-download fa-icon"></i></a>
     </div>
+    <div class="flex align-center justify-center">
+    <a href="#" onclick="downloadCanvas(this)"><i class="fas fa-download fa-icon"></i></a>
+    <form class="form" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+       <input name="img" id="imgData" type="hidden" />
+       <button class="fb-btn" type="submit"><i class="fab fa-facebook-square fa-icon fb"></i></button>
+       <div class="share-container"></div>
+   </form>
+   </div>
     <div class="stickers flex"></div>
     </div>
     </main>`
