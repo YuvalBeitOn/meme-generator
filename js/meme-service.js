@@ -1,7 +1,7 @@
 'use strict';
 
 const STORAGE_KEY = 'memes'
-var gKeywords = { 'happy': 0, 'angry': 0, 'baby': 0, 'dog': 0, 'putin': 0, 'funny': 0, 'cute': 0, 'kiss': 0, 'animal': 0 };
+var gKeywords = { 'happy': 0, 'angry': 0, 'baby': 0, 'dog': 0, 'putin': 0, 'funny': 0, 'cute': 0 };
 var gColor = '#000000';
 var gFilter = '';
 var gSavedMems = [];
@@ -162,7 +162,8 @@ function filterImgByKeyword() {
 
 function addTextLine() {
     let newLine = {
-        txt: '',
+        txt: 'Type here',
+        font: 'impact',
         size: 48,
         align: 'center',
         fill: 'white',

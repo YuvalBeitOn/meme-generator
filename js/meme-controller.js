@@ -59,7 +59,7 @@ function renderGallery() {
     <img class="me-img" src="img/me.png">
     <div class="about-content flex column wrap">
     <h3>Yuval Beit On</h3>
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae vel saepe dolore temporibus necessitatibus aliquid praesentium explicabo, sed laboriosam.</p>
+    <p>My name is Yuval, I am 23 years old and I am studying web development, hope you will like my project, enjoy!</p>
     <ul class="social-icons clean-list flex justify-center wrap">
     <img class="about-icon" src="img/icons/github-logo.png" alt="">
     <img class="about-icon"  src="img/icons/facebook-logo.png" alt="">
@@ -81,8 +81,8 @@ function renderEditor() {
     <input class="text-input" onkeyup="handleTextChange(event)" type="text" placeholder="Enter text here">
     <div class="btns-container">
     <button onClick="handleChangeLine(${1})"><img src="img/icons/up-down.png" alt=""></button>
-    <button onClick="handleChangeLinePos(${-3})"><i class="fas fa-arrow-up fa-icon"></i></button>
-    <button onClick="handleChangeLinePos(${3})"><i class="fas fa-arrow-down fa-icon"></i></button>
+    <button onClick="handleChangeLinePos(${-5})"><i class="fas fa-arrow-up fa-icon"></i></button>
+    <button onClick="handleChangeLinePos(${5})"><i class="fas fa-arrow-down fa-icon"></i></button>
     <button onclick="handleAddLine()"><img src="img/icons/add.png" alt=""></button>
     <button onclick="handleDeleteLine()"><img src="img/icons/trash.png" alt=""></button>
     </div>
@@ -90,14 +90,9 @@ function renderEditor() {
     <button onclick="handleFontSize(${3})"><img src="img/icons/increase.png" alt=""></button>
     <button onclick="handleFontSize(${-3})"><img src="img/icons/decrease.png" alt=""></button>
     <button onclick="handleTextAlign('right')"><img src="img/icons/align-left.png" alt=""></button>
-    <button onclick="handleTextAlign('left')"><img src="img/icons/align-right.png" alt=""></button>
     <button onclick="handleTextAlign('center')"><img src="img/icons/center-text.png" alt=""></button>
+    <button onclick="handleTextAlign('left')"><img src="img/icons/align-right.png" alt=""></button>
     </div>
-    <div class="colors-controls">
-    <label for="fill-color"><img src="img/icons/color.png" alt=""></img></label>
-    <input onchange="handleFillColor()" type="color" id="fill-color" value="#000000">
-    <label for="stroke-color"><img src="img/icons/text-stroke.png" alt=""></label>
-    <input onchange="handleStrokeColor()" type="color" id="stroke-color" value="#000000">
     <select id="font" onchange="handleFontFamily(this.value)">
             <option value="impact">Impact</option>
             <option value="helvetica">Helvetica</option>
@@ -105,14 +100,19 @@ function renderEditor() {
             <option value="serif">Serif</option>
             <option value="cursive">Cursive</option>
         </select>
+    <div class="colors-controls">
+    <label for="fill-color"><img src="img/icons/color.png" alt=""></img></label>
+    <input onchange="handleFillColor()" type="color" id="fill-color" value="#000000">
+    <label for="stroke-color"><img src="img/icons/text-stroke.png" alt=""></label>
+    <input onchange="handleStrokeColor()" type="color" id="stroke-color" value="#000000">
     </div>
-            <div class="actions">
-            <button class="save-btn" onclick="saveCanvas()">Save</button>
-            <a href="#" onclick="downloadCanvas(this)"><i class="fas fa-download fa-icon"></i></a>
-            </div>
-            <div class="stickers flex"></div>
-            </div>
-            </main>`
+    <div class="actions">
+    <button class="save-btn" onclick="saveCanvas()">Save</button>
+    <a href="#" onclick="downloadCanvas(this)"><i class="fas fa-download fa-icon"></i></a>
+    </div>
+    <div class="stickers flex"></div>
+    </div>
+    </main>`
     document.querySelector('.main-container').innerHTML = strHtml;
     initEditor();
     drawImg();
@@ -234,6 +234,7 @@ function handleTextChange(ev) {
 
 function markSelectedText() {
     const line = getSelectedLine();
+    console.log(line);
     const textProps = gCtx.measureText(line.txt, 'Impact');
     let posY = line.position.y - line.size;
     let posX = line.position.x - textProps.width / 2 - 10;
@@ -258,7 +259,7 @@ function drawImg() {
 function drawText() {
     const lines = getLines();
     drawImg();
-    markSelectedText();
+    // markSelectedText();
     lines.forEach((line) => {
         gCtx.font = `${line.size}px ${line.font}`;
         gCtx.textAlign = line.align;
