@@ -71,6 +71,8 @@ nav {
 .main-footer {
     background-color: #f7caca;
     height: 6rem;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
 .search-meme {

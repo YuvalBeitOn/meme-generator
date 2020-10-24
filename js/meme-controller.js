@@ -2,6 +2,8 @@
 
 var gCanvas;
 var gCtx;
+var gDragTrue;
+var gIsCanvasDone = false;
 
 function init() {
     renderGallery();
@@ -75,7 +77,7 @@ function renderEditor() {
     const strHtml =
         `<main class="editor flex">
     <div class="canvas-container">
-    <canvas id="canvas"></canvas>
+    <canvas onmousedown="dragText(event)" onmouseup="dropText(event)" id="canvas"></canvas>
     </div>
     <div class="editor-controls">
     <input class="text-input" onkeyup="handleTextChange(event)" type="text" placeholder="Enter text here">
@@ -107,6 +109,7 @@ function renderEditor() {
     <input onchange="handleStrokeColor()" type="color" id="stroke-color" value="#000000">
     </div>
     <div class="actions">
+    <button class="done-btn" onclick="doneCanvas()">Done</button>
     <button class="save-btn" onclick="saveCanvas()">Save</button>
     <a href="#" onclick="downloadCanvas(this)"><i class="fas fa-download fa-icon"></i></a>
     </div>
@@ -120,6 +123,7 @@ function renderEditor() {
     // renderStickers();
 }
 
+
 function renderStickers() {
     const stickers = getStickers();
     var strHtml = stickers.map((sticker) => {
@@ -129,6 +133,41 @@ function renderStickers() {
     const elStickers = document.querySelector('.stickers');
     elStickers.innerHTML = strHtml;
 }
+
+/***** drag and drop *****/
+
+function dragText(ev) {
+    const line = getSelectedLine();
+    const textProps = gCtx.measureText(line.txt, 'Impact');
+    let width = textProps.width + 20;
+    let height = line.size + 10;
+    let top = gCanvas.getBoundingClientRect().top;
+    let left = gCanvas.getBoundingClientRect().left;
+    let posX1 = line.position.x - textProps.width / 2 - 10 + left;
+    let posY1 = line.position.y - line.size + top;
+    let posX2 = line.position.x - textProps.width / 2 - 10 + width + left;
+    let posY2 = line.position.y - line.size + height + top;
+    if (ev.pageX > posX1 && ev.pageX < posX2 && ev.pageY > posY1 && ev.pageY < posY2) {
+        gDragTrue = true;
+        gCanvas.onmousemove = moveText;
+    }
+}
+
+function dropText() {
+    gDragTrue = false;
+    gCanvas.onmousemove = null;
+}
+
+function moveText(ev) {
+    if (gDragTrue) {
+        const line = getSelectedLine();
+        line.position.x = ev.pageX - gCanvas.getBoundingClientRect().left;
+        line.position.y = ev.pageY - gCanvas.getBoundingClientRect().top;
+        drawText();
+    }
+}
+
+
 
 /***** resize functions *****/
 
@@ -210,7 +249,7 @@ function handleDeleteLine() {
 }
 
 function handleChangeLine(diff) {
-    setSelectedLine(+diff);
+    setSelectedLine(diff);
     drawText();
     markSelectedText();
 }
@@ -234,11 +273,10 @@ function handleTextChange(ev) {
 
 function markSelectedText() {
     const line = getSelectedLine();
-    console.log(line);
     const textProps = gCtx.measureText(line.txt, 'Impact');
     let posY = line.position.y - line.size;
     let posX = line.position.x - textProps.width / 2 - 10;
-    drawRect(posX, posY, textProps.width + 20, line.size + 10);
+    if (!gIsCanvasDone) drawRect(posX, posY, textProps.width + 20, line.size + 10);
 }
 
 function drawRect(x, y, width, height) {
@@ -257,9 +295,8 @@ function drawImg() {
 
 
 function drawText() {
-    const lines = getLines();
     drawImg();
-    // markSelectedText();
+    const lines = getLines();
     lines.forEach((line) => {
         gCtx.font = `${line.size}px ${line.font}`;
         gCtx.textAlign = line.align;
@@ -269,6 +306,7 @@ function drawText() {
         gCtx.fillText(line.txt, line.position.x, line.position.y);
         gCtx.strokeText(line.txt, line.position.x, line.position.y);
     });
+    markSelectedText();
 }
 
 function drawSticker(stickerId) {
@@ -290,4 +328,18 @@ function saveCanvas() {
     gSavedMems.push(canvas.toDataURL());
     saveToStorage(STORAGE_KEY, gSavedMems)
     console.log(gSavedMems);
+}
+
+function doneCanvas() {
+    const lines = getLines();
+    drawImg();
+    lines.forEach((line) => {
+        gCtx.font = `${line.size}px ${line.font}`;
+        gCtx.textAlign = line.align;
+        gCtx.lineWidth = '2';
+        gCtx.strokeStyle = line.stroke;
+        gCtx.fillStyle = line.fill;
+        gCtx.fillText(line.txt, line.position.x, line.position.y);
+        gCtx.strokeText(line.txt, line.position.x, line.position.y);
+    });
 }

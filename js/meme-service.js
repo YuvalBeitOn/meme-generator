@@ -151,7 +151,7 @@ function countKeywords(keyword) {
 function filterImgByKeyword() {
     let filteredImgs = gImgs.filter((img) => {
         if (img.keywords.some(word => {
-                if (word.startsWith(gFilter)) return word
+                if (word.startsWith(gFilter)) return word;
             }))
             return img;
     });
@@ -175,10 +175,11 @@ function addTextLine() {
 }
 
 function deleteLine() {
-    gMeme.lines.splice(gMeme.selectedLineIdx, 1);
-    gMeme.selectedLineIdx = 0;
+    if (gMeme.lines.length > 1) {
+        gMeme.lines.splice(gMeme.selectedLineIdx, 1);
+        gMeme.selectedLineIdx = 0;
+    }
 }
-
 
 /***** set functions *****/
 
@@ -226,16 +227,13 @@ function setTextAlign(align) {
 }
 
 function setSelectedLine(diff) {
-    if (gMeme.selectedLineIdx + diff >= gMeme.lines.length) {
-        gMeme.selectedLineIdx = -1;
-    }
-    return gMeme.selectedLineIdx += +diff;
+    if (gMeme.selectedLineIdx + diff >= gMeme.lines.length) gMeme.selectedLineIdx = 0;
+    else gMeme.selectedLineIdx += diff;
 }
 
 function setSelectedImgId(imgId) {
     gMeme.selectedImgId = imgId;
 }
-
 
 
 /***** get functions *****/
