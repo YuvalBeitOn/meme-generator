@@ -245,6 +245,7 @@ function handleFillColor() {
 }
 
 function handleAddLine() {
+    document.querySelector('.text-input').value = '';
     addTextLine();
     setCanvasSizes(gCanvas.width);
     drawText();
@@ -257,6 +258,7 @@ function handleDeleteLine() {
 
 function handleChangeLine(diff) {
     setSelectedLine(diff);
+    document.querySelector('.text-input').value = getSelectedLine().txt;
     drawText();
     markSelectedText();
 }
