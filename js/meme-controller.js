@@ -23,7 +23,6 @@ function getCanvas() {
     return gCanvas;
 }
 
-
 /***** render functions *****/
 
 function renderImgsList() {
@@ -46,90 +45,20 @@ function renderKeywordList() {
 }
 
 function renderGallery() {
-    const strHtml = `<main> 
-    <section class="filters-container">
-    <div class="filters container flex space-between align-center">
-    <div>
-    <input onkeyup="handleFilterKeyWord(this.value)" class="search-meme" type="text" placeholder="Search keyword">
-    <img class="search-icon" src="img/icons/search-icon.png" alt="">
-    </div>
-    <div class="keywords flex space-between align-center"></div>
-    </div>
-    </section>
-    <div class="img-gallery flex wrap"></div>
-    <section class="about flex space-between align-center">
-    <img class="me-img" src="img/me.png">
-    <div class="about-content flex column wrap">
-    <h3>Yuval Beit On</h3>
-    <p>My name is Yuval, I am 23 years old and I am studying web development, hope you will like my project, enjoy!</p>
-    <ul class="social-icons clean-list">
-    <img class="about-icon" src="img/icons/github-logo.png" alt="">
-    <img class="about-icon"  src="img/icons/facebook-logo.png" alt="">
-    </ul>
-    </div>
-    </section> <main/>`;
-    document.querySelector('.main-container').innerHTML = strHtml;
+    document.querySelector('.gallery').style.display = "block";
+    document.querySelector('.main-container').style.display = "none";
     renderImgsList();
     renderKeywordList();
 }
 
 function renderEditor() {
-    const strHtml =
-        `<main class="editor flex">
-    <div class="canvas-container">
-    <canvas onmousedown="dragText(event)" onmouseup="dropText(event)" id="canvas"></canvas>
-    </div>
-    <div class="editor-controls">
-    <input class="text-input" onkeyup="handleTextChange(event)" type="text" placeholder="Enter text here">
-    <div class="btns-container">
-    <button onClick="handleChangeLine(${1})"><img src="img/icons/up-down.png" alt=""></button>
-    <button onClick="handleChangeLinePos(${-5})"><i class="fas fa-arrow-up fa-icon"></i></button>
-    <button onClick="handleChangeLinePos(${5})"><i class="fas fa-arrow-down fa-icon"></i></button>
-    <button onclick="handleAddLine()"><img src="img/icons/add.png" alt=""></button>
-    <button onclick="handleDeleteLine()"><img src="img/icons/trash.png" alt=""></button>
-    </div>
-    <div class="text-controls">
-    <button onclick="handleFontSize(${3})"><img src="img/icons/increase.png" alt=""></button>
-    <button onclick="handleFontSize(${-3})"><img src="img/icons/decrease.png" alt=""></button>
-    <button onclick="handleTextAlign('right')"><img src="img/icons/align-left.png" alt=""></button>
-    <button onclick="handleTextAlign('center')"><img src="img/icons/center-text.png" alt=""></button>
-    <button onclick="handleTextAlign('left')"><img src="img/icons/align-right.png" alt=""></button>
-    </div>
-    <select id="font" onchange="handleFontFamily(this.value)">
-            <option value="impact">Impact</option>
-            <option value="helvetica">Helvetica</option>
-            <option value="verdana">Verdana</option>
-            <option value="serif">Serif</option>
-            <option value="cursive">Cursive</option>
-        </select>
-    <div class="colors-controls">
-    <label for="fill-color"><img src="img/icons/color.png" alt=""></img></label>
-    <input onchange="handleFillColor()" type="color" id="fill-color" value="#000000">
-    <label for="stroke-color"><img src="img/icons/text-stroke.png" alt=""></label>
-    <input onchange="handleStrokeColor()" type="color" id="stroke-color" value="#000000">
-    </div>
-    <div class="actions">
-    <button class="done-btn" onclick="doneCanvas()">Done</button>
-    <button class="save-btn" onclick="saveCanvas()">Save</button>
-    </div>
-    <div class="flex align-center justify-center">
-    <a href="#" onclick="downloadCanvas(this)"><i class="fas fa-download fa-icon"></i></a>
-    <form class="form" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
-       <input name="img" id="imgData" type="hidden" />
-       <button class="fb-btn" type="submit"><i class="fab fa-facebook-square fa-icon fb"></i></button>
-       <div class="share-container"></div>
-   </form>
-   </div>
-    <div class="stickers flex"></div>
-    </div>
-    </main>`
-    document.querySelector('.main-container').innerHTML = strHtml;
+    document.querySelector('.gallery').style.display = "none";
+    document.querySelector('.main-container').style.display = "block";
     initEditor();
     drawImg();
     drawText();
     // renderStickers();
 }
-
 
 function renderStickers() {
     const stickers = getStickers();
@@ -175,9 +104,7 @@ function moveText(ev) {
 }
 
 
-
 /***** resize functions *****/
-
 
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container');
@@ -193,13 +120,13 @@ function resizeEditor() {
     elEditor.style.height = gCanvas.height + 'px';
 }
 
-function toggleActiceNav() {
-    var els = document.querySelectorAll('.nav-link');
-    els.forEach(element => {
-        if (element.className.includes('marked')) element.className = 'nav-link';
-        else element.className = 'nav-link marked';
-    });
-}
+// function toggleActiceNav() {
+//     var els = document.querySelectorAll('.nav-link');
+//     els.forEach(element => {
+//         if (element.className.includes('marked')) element.className = 'nav-link';
+//         else element.className = 'nav-link marked';
+//     });
+// }
 
 function scrollToAbout() {
     const elTarget = document.querySelector('.about');
