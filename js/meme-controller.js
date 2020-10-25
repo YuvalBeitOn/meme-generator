@@ -62,11 +62,11 @@ function renderGallery() {
     <div class="about-content flex column wrap">
     <h3>Yuval Beit On</h3>
     <p>My name is Yuval, I am 23 years old and I am studying web development, hope you will like my project, enjoy!</p>
-    <ul class="social-icons clean-list flex justify-center wrap">
+    <ul class="social-icons clean-list">
     <img class="about-icon" src="img/icons/github-logo.png" alt="">
     <img class="about-icon"  src="img/icons/facebook-logo.png" alt="">
     </ul>
-</div>
+    </div>
     </section> <main/>`;
     document.querySelector('.main-container').innerHTML = strHtml;
     renderImgsList();
