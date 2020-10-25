@@ -45,6 +45,9 @@
     .img-gallery .gallery-item {
         width: 80%;
     }
+    nav {
+        font-size: 1rem!important;
+    }
 }
 
 @media (max-width: 460px) {
@@ -53,17 +56,5 @@
     }
     .about-icon {
         width: 30px;
-    }
-}
-
-@media (max-width: 440px) {
-    nav {
-        font-size: 1rem!important;
-    }
-}
-
-@media (max-width: 400px) {
-    nav {
-        margin-left: 2rem;
     }
 }

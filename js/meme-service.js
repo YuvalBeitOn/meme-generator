@@ -101,15 +101,16 @@ var gImgs = [{
 ]
 
 var gStickers = [
-    { id: 1, url: 'stickers/animal.png' },
-    { id: 2, url: 'stickers/boy.png' },
-    { id: 3, url: 'stickers/cat.png' },
-    { id: 4, url: 'stickers/crab.png' },
-    { id: 5, url: 'stickers/princess.png' },
-    { id: 6, url: 'stickers/rainbow.png' }
+    { id: 1, txt: '🐻' },
+    { id: 2, txt: '🐳' },
+    { id: 3, txt: '🍌' },
+    { id: 4, txt: '🏀' },
+    { id: 5, txt: '🚗' },
+    { id: 6, txt: '💣' },
+    { id: 7, txt: '🔔' },
+    { id: 8, txt: '🐔' },
+    { id: 9, txt: '🍕' }
 ]
-
-
 
 var gMeme = {
     selectedImgId: 1,
@@ -160,15 +161,16 @@ function filterImgByKeyword() {
 
 /***** add and delete functions *****/
 
-function addTextLine() {
+function addTextLine(txt = 'Type here') {
+    const canvas = getCanvas();
     let newLine = {
-        txt: 'Type here',
+        txt: txt,
         font: 'impact',
         size: 48,
         align: 'center',
         fill: 'white',
         stroke: 'black',
-        position: { x: 250, y: (gMeme.lines[gMeme.lines.length - 1].position.y) + 100 }
+        position: { x: canvas.width / 2, y: canvas.height / 2 }
     }
     gMeme.lines.push(newLine);
     gMeme.selectedLineIdx = gMeme.lines.length - 1;
@@ -198,7 +200,7 @@ function setFilter(value) {
 }
 
 function setLinePos(diff) {
-    return gMeme.lines[gMeme.selectedLineIdx].position.y += diff;
+    gMeme.lines[gMeme.selectedLineIdx].position.y += diff;
 }
 
 
@@ -289,11 +291,11 @@ function setText(txt) {
 
 /**** local storage ****/
 
-function getSaveCanvas() {
-    const datas = loadFromStorage(STORAGE_KEY);
-    return datas.map((data) => {
-        let img = new Image;
-        img.src = data;
-        return img;
-    })
+function saveCanvas(url) {
+    let memes = loadFromStorage(STORAGE_KEY);
+    if (!memes) memes = [];
+    if (memes.length <= 10) {
+        memes.push(url);
+        saveToStorage(STORAGE_KEY, memes)
+    } else return;
 }

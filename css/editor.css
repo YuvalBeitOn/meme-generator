@@ -1,170 +1,209 @@
-.editor {
-    padding: 0 3.125rem 0 3.125rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-}
-
-.canvas-container {
-    width: 50%;
-    position: relative;
-    margin-right: 1rem;
-}
-
-canvas {
-    width: 100%;
-    display: block;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.767);
-    cursor: pointer;
-}
-
-.editor-controls {
-    width: 50%;
-    margin-left: 1rem;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-}
-
-.editor-controls img {
-    width: 45px;
-}
-
-.editor-controls button {
-    background-color: transparent;
-    outline: none;
-    border: none;
-    margin: 0.3rem;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.767);
-    border-radius: 5px;
-}
-
-.btns-container {
-    display: flex;
-}
-
-.text-input {
-    font-size: 1.5rem;
-    border-radius: 12px;
-    padding: 1rem;
-    outline: none;
-    border: none;
-}
-
-#fill-color,
-#stroke-color {
-    visibility: hidden;
-    width: 0px;
-    padding: 0;
-    margin: 0;
-}
-
-.fa-icon {
-    color: black;
-    background-color: transparent;
-    font-size: 50px;
-}
-
-.colors-controls {
-    position: relative;
-}
-
-.save-btn,
-.done-btn {
-    font-size: 1.3rem;
-    font-weight: bold;
-    padding: 0.3rem;
-}
-
-.fb-btn {
-    box-shadow: none!important;
-}
-
-form {
-    position: relative;
-}
-
-.a-btn {
-    position: absolute;
-    font-weight: bold;
-    font-size: 1.3rem;
-    right: 15px;
-}
-
-.fb {
-    font-size: 54px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: ;
-}
-
-#font {
-    font-size: 1.5rem;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.767);
-    border: none;
-    border-radius: 5px;
-}
-
-.stickers {
-    width: 25rem;
-    overflow: auto;
-}
-
-.stickers img {
-    width: 80px;
-    padding: 0.5rem;
-    cursor: pointer;
-}
-
-@media (max-width: 850px) {
     .editor {
-        flex-wrap: wrap;
+        padding: 0 3.125rem 0 3.125rem;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
     }
-    .editor-controls {
-        width: 100%;
-        margin: 0;
-        margin-top: 1rem;
-    }
+    
     .canvas-container {
+        width: 50%;
+        position: relative;
+        margin-right: 1rem;
+    }
+    
+    canvas {
         width: 100%;
+        display: block;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.767);
+        cursor: pointer;
+    }
+    
+    .editor-controls {
+        width: 50%;
+        margin-left: 1rem;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .editor-controls img {
+        width: 45px;
+    }
+    
+    .editor-controls button {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        margin: 0.3rem;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.767);
+        border-radius: 5px;
+    }
+    
+    .btns-container {
+        display: flex;
+    }
+    
+    .text-input {
+        font-size: 1.5rem;
+        border-radius: 12px;
+        padding: 1rem;
+        outline: none;
+        border: none;
+    }
+    
+    #fill-color,
+    #stroke-color {
+        visibility: hidden;
+        width: 0px;
+        padding: 0;
         margin: 0;
     }
-}
-
-@media (max-width: 510px) {
-    .editor {
-        padding: 0 1rem 0 1rem;
-    }
+    
     .fa-icon {
-        font-size: 30px;
+        color: black;
+        background-color: transparent;
+        font-size: 50px;
     }
-    .editor-controls img {
-        width: 35px;
+    
+    .colors-controls {
+        position: relative;
     }
-    .text-input {
-        font-size: 1rem;
-    }
-    #font {
-        font-size: 1.2rem;
-    }
+    
     .save-btn,
     .done-btn {
+        font-size: 1.3rem;
+        font-weight: bold;
+        padding: 0.3rem;
+    }
+    
+    .fb-btn {
+        box-shadow: none!important;
+    }
+    
+    form {
+        position: relative;
+    }
+    
+    .a-btn {
+        position: absolute;
+        font-weight: bold;
+        font-size: 1.3rem;
+        right: 15px;
+    }
+    
+    .fb {
+        font-size: 54px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: ;
+    }
+    
+    .font {
         font-size: 1rem;
+        margin-right: 1rem;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.767);
+        border: none;
+        border-radius: 5px;
+        height: 70%;
+        align-self: center;
     }
-}
-
-@media (max-width: 400px) {
-    .fa-icon {
-        font-size: 25px;
+    
+    .stickers {
+        width: 23rem;
+        overflow: auto;
     }
-    .editor-controls img {
-        width: 25px;
+    
+    .stickers::-webkit-scrollbar {
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
     }
-    .text-input {
-        font-size: 0.8rem;
+    
+    .stickers::-webkit-scrollbar-thumb {
+        background: rgb(255, 185, 185);
+        border-radius: 5px;
     }
-    #font {
-        font-size: 1rem;
+    
+    .sticker {
+        font-size: 45px;
+        margin: 0.5rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
     }
-}
+    
+    @media (max-width: 1030px) {
+        .fa-icon {
+            font-size: 40px;
+        }
+        .editor-controls img {
+            width: 40px;
+        }
+    }
+    
+    @media (max-width: 940px) {
+        .editor {
+            flex-wrap: wrap;
+        }
+        .editor-controls {
+            width: 100%;
+            margin: 0;
+            margin-top: 1rem;
+        }
+        .canvas-container {
+            width: 100%;
+            margin: 0;
+        }
+    }
+    
+    @media (max-width: 580px) {
+        .editor {
+            padding: 0 1rem 0 1rem;
+        }
+        .fa-icon {
+            font-size: 30px;
+        }
+        .editor-controls img {
+            width: 35px;
+        }
+        .text-input {
+            font-size: 1rem;
+        }
+        .font {
+            font-size: 1.2rem;
+        }
+        .save-btn,
+        .done-btn {
+            font-size: 1rem;
+        }
+        .stickers {
+            width: 20rem;
+        }
+        .sticker {
+            font-size: 35px;
+        }
+    }
+    
+    @media (max-width: 430px) {
+        .fa-icon {
+            font-size: 25px;
+        }
+        .editor-controls img {
+            width: 25px;
+        }
+        .text-input {
+            font-size: 0.8rem;
+        }
+        .font {
+            font-size: 1rem;
+        }
+        .stickers {
+            width: 15rem;
+        }
+        .sticker {
+            font-size: 25px;
+            margin: 0.1rem;
+        }
+        .editor {
+            margin-bottom: 1rem;
+        }
+    }

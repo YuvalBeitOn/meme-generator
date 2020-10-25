@@ -12,15 +12,14 @@
 </head>
 
 <body onload="init()">
-    <header class="flex space-between align-center container">
+    <header class="flex space-between align-center">
         <img onclick="renderGallery()" class="logo" src="img/logo.png" alt="" />
         <nav>
             <span onclick="renderGallery()" class="nav-link">Gallery</span>
+            <a class="nav-link" href="savedMemes.html">Memes</a>
             <span onclick="scrollToAbout()" class="nav-link">About</span>
-
-            <!-- <span onclick="navToGallery();" class="nav-link marked">Gallery</span>
-            <span onclick="navToAbout();" class="nav-link">About</span> -->
         </nav>
+        <button class="menu-btn" onclick="toggleMenu()"><i class="hamburger fas fa-bars"></i></button>
     </header>
 
     <div class="gallery">
@@ -63,19 +62,19 @@
                 </div>
                 <div class="text-controls">
                     <button onclick="handleFontSize(3)"><img src="img/icons/increase.png" alt=""></button>
-                    <button onclick="handleFontSize(3)"><img src="img/icons/decrease.png" alt=""></button>
+                    <button onclick="handleFontSize(-3)"><img src="img/icons/decrease.png" alt=""></button>
                     <button onclick="handleTextAlign('right')"><img src="img/icons/align-left.png" alt=""></button>
                     <button onclick="handleTextAlign('center')"><img src="img/icons/center-text.png" alt=""></button>
                     <button onclick="handleTextAlign('left')"><img src="img/icons/align-right.png" alt=""></button>
                 </div>
-                <select id="font" onchange="handleFontFamily(this.value)">
-                <option value="impact">Impact</option>
-                <option value="helvetica">Helvetica</option>
-                <option value="verdana">Verdana</option>
-                <option value="serif">Serif</option>
-                <option value="cursive">Cursive</option>
-            </select>
-                <div class="colors-controls">
+                <div class="colors-controls flex justify-center">
+                    <select class="font" id="font" onchange="handleFontFamily(this.value)">
+                    <option value="impact">Impact</option>
+                    <option value="helvetica">Helvetica</option>
+                    <option value="verdana">Verdana</option>
+                    <option value="serif">Serif</option>
+                    <option value="cursive">Cursive</option>
+                    </select>
                     <label for="fill-color"><img src="img/icons/color.png" alt=""></img></label>
                     <input onchange="handleFillColor()" type="color" id="fill-color" value="#000000">
                     <label for="stroke-color"><img src="img/icons/text-stroke.png" alt=""></label>
@@ -83,7 +82,7 @@
                 </div>
                 <div class="actions">
                     <button class="done-btn" onclick="doneCanvas()">Done</button>
-                    <button class="save-btn" onclick="saveCanvas()">Save</button>
+                    <button class="save-btn" onclick="onSaveCanvas()">Save</button>
                 </div>
                 <div class="flex align-center justify-center">
                     <a href="#" onclick="downloadCanvas(this)"><i class="fas fa-download fa-icon"></i></a>
@@ -98,6 +97,8 @@
         </div>
     </div>
 
+    <div class="saved-memes"></div>
+
 
     <footer class="main-footer flex justify-center align-center">
         <small>© 2020 Coffee-Rights</small>
@@ -105,8 +106,8 @@
 
     <script src="js/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>
-    <script src="js/upload.js"></script>
     <script src="js/localstorage.js"></script>
+    <script src="js/upload.js"></script>
 
 
 </body>

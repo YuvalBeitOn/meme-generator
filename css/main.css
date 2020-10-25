@@ -1,150 +1,186 @@
-* {
-    box-sizing: border-box;
-    font-family: monts;
-}
-
-@font-face {
-    font-family: monts;
-    src: url('../fonts/Montserrat-Regular.ttf');
-}
-
-body {
-    margin: 0;
-    width: inherit;
-    background-color: #e3e3e3;
-}
-
-header {
-    height: 4.12rem;
-    background-color: #f7caca;
-}
-
-button,
-input {
-    cursor: pointer;
-}
-
-nav {
-    font-size: 1.187rem;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: white;
-    cursor: pointer;
-    padding: 0.5rem;
-}
-
-.nav-link:hover {
-    color: rgba(192, 181, 181, 0.678);
-}
-
-.nav-link.marked {
-    color: gray;
-}
-
-.logo {
-    width: 8.312rem;
-    cursor: pointer;
-}
-
-.about {
-    padding: 8rem;
-}
-
-.me-img {
-    border-radius: 50%;
-    width: 18rem;
-    height: 18rem;
-    border: 2px solid rgba(197, 188, 188, 0.623);
-    object-fit: cover;
-}
-
-.about-content {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.about-icon {
-    width: 35px;
-}
-
-.main-footer {
-    background-color: #f7caca;
-    height: 6rem;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-.search-meme {
-    font-size: 1.2rem;
-    font-family: 'monts';
-    outline: none;
-    border: 0;
-    border-bottom: 2px solid black;
-    width: 10rem;
-}
-
-
-/* helpers */
-
-.flex {
-    display: flex;
-}
-
-.flex.space-between {
-    justify-content: space-between;
-}
-
-.flex.align-center {
-    align-items: center;
-}
-
-.flex.justify-center {
-    justify-content: center;
-}
-
-.flex.wrap {
-    flex-wrap: wrap;
-}
-
-.container {
-    padding: 0 3.125rem 0 3.125rem;
-}
-
-
-/* list-helpers */
-
-.clean-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-@media (max-width: 980px) {
-    .filters {
-        flex-direction: column;
-        justify-content: center!important;
-    }
-    .keyword {
-        padding: 0.5rem;
-        font-size: 3rem;
-    }
-    .keywords {
-        width: 100%!important;
-        justify-content: center!important;
-    }
-    .search-meme {
-        margin-top: 1rem;
-    }
-}
-
-@media (max-width: 850px) {
-    .about {
-        display: flex;
-        flex-direction: column;
-        padding: 0;
-        margin-top: 30px;
-    }
-}
+        * {
+            box-sizing: border-box;
+            font-family: monts;
+        }
+        
+        @font-face {
+            font-family: monts;
+            src: url('../fonts/Montserrat-Regular.ttf');
+        }
+        
+        body {
+            margin: 0;
+            width: inherit;
+            background-color: #e3e3e3;
+        }
+        
+        header {
+            height: 4.12rem;
+            background-color: #f7caca;
+            padding: 0 3.125rem 0 3.125rem;
+        }
+        
+        button,
+        input {
+            cursor: pointer;
+        }
+        
+        nav {
+            font-size: 1.187rem;
+            visibility: visible;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .nav-link:hover {
+            color: rgba(192, 181, 181, 0.678);
+        }
+        
+        .logo {
+            width: 8.312rem;
+            cursor: pointer;
+        }
+        
+        .about {
+            padding: 8rem;
+        }
+        
+        .me-img {
+            border-radius: 50%;
+            width: 18rem;
+            height: 18rem;
+            border: 2px solid rgba(197, 188, 188, 0.623);
+            object-fit: cover;
+        }
+        
+        .about-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .about-icon {
+            width: 35px;
+        }
+        
+        .main-footer {
+            position: static;
+            bottom: 0;
+            height: 6rem;
+            width: 100%;
+            background-color: #f7caca;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .search-meme {
+            font-size: 1.2rem;
+            font-family: 'monts';
+            outline: none;
+            border: 0;
+            border-bottom: 2px solid black;
+            width: 10rem;
+        }
+        /* helpers */
+        
+        .flex {
+            display: flex;
+        }
+        
+        .flex.space-between {
+            justify-content: space-between;
+        }
+        
+        .flex.align-center {
+            align-items: center;
+        }
+        
+        .flex.justify-center {
+            justify-content: center;
+        }
+        
+        .flex.wrap {
+            flex-wrap: wrap;
+        }
+        
+        .container {
+            padding: 0 3.125rem 0 3.125rem;
+        }
+        
+        .menu-btn {
+            display: none;
+        }
+        /* list-helpers */
+        
+        .clean-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        @media (max-width: 980px) {
+            .filters {
+                flex-direction: column;
+                justify-content: center!important;
+            }
+            .keyword {
+                padding: 0.5rem;
+                font-size: 3rem;
+            }
+            .keywords {
+                width: 100%!important;
+                justify-content: center!important;
+            }
+            .search-meme {
+                margin-top: 1rem;
+            }
+        }
+        
+        @media (max-width: 850px) {
+            .about {
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+                margin-top: 30px;
+            }
+        }
+        
+        @media (max-width: 470px) {
+            header {
+                padding: 0 0.5rem 0 0.5rem;
+            }
+            .menu-btn {
+                display: block;
+                background-color: transparent;
+                border: none;
+                outline: none;
+            }
+            .hamburger {
+                font-size: 25px;
+                color: white;
+            }
+            nav {
+                display: flex;
+                visibility: hidden;
+                position: absolute;
+                margin: 0;
+                top: 65px;
+                right: 0;
+                height: 120px;
+                background-color: #292929de;
+                flex-direction: column;
+                width: 140px;
+                align-items: center;
+                z-index: 10;
+            }
+            .nav-link {
+                border-bottom: 1px solid #ffffff80;
+                width: 100%;
+                text-align: center;
+            }
+        }

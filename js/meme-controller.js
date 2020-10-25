@@ -2,15 +2,12 @@
 
 var gCanvas;
 var gCtx;
-var gDragTrue;
-var gIsCanvasDone = false;
+var gIsDrag;
 
 function init() {
     renderGallery();
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('resize', resizeEditor);
-    toggleActiceNav();
-
 }
 
 function initEditor() {
@@ -57,14 +54,13 @@ function renderEditor() {
     initEditor();
     drawImg();
     drawText();
-    // renderStickers();
+    renderStickers();
 }
 
 function renderStickers() {
     const stickers = getStickers();
     var strHtml = stickers.map((sticker) => {
-        return `<img class="sticker" onclick="drawSticker(${sticker.id})" src="${sticker.url}" alt="${sticker.id}"/>
-        `
+        return `<span class="sticker" onclick="handleAddLine('${sticker.txt}')">${sticker.txt}</span>`
     }).join('');
     const elStickers = document.querySelector('.stickers');
     elStickers.innerHTML = strHtml;
@@ -74,28 +70,32 @@ function renderStickers() {
 
 function dragText(ev) {
     const line = getSelectedLine();
-    const textProps = gCtx.measureText(line.txt, 'Impact');
-    let width = textProps.width + 20;
+    let width = gCanvas.width;
     let height = line.size + 10;
     let top = gCanvas.getBoundingClientRect().top;
     let left = gCanvas.getBoundingClientRect().left;
-    let posX1 = line.position.x - textProps.width / 2 - 10 + left;
+    let posX1 = line.position.x + left;
     let posY1 = line.position.y - line.size + top;
-    let posX2 = line.position.x - textProps.width / 2 - 10 + width + left;
+    let posX2 = line.position.x + width + left;
     let posY2 = line.position.y - line.size + height + top;
     if (ev.pageX > posX1 && ev.pageX < posX2 && ev.pageY > posY1 && ev.pageY < posY2) {
-        gDragTrue = true;
+        console.log('here');
+        ev.preventDefault();
+        gIsDrag = true;
         gCanvas.onmousemove = moveText;
     }
 }
 
 function dropText() {
-    gDragTrue = false;
+    gIsDrag = false;
+    console.log(gIsDrag);
     gCanvas.onmousemove = null;
 }
 
 function moveText(ev) {
-    if (gDragTrue) {
+    ev.preventDefault();
+    console.log(gIsDrag);
+    if (gIsDrag) {
         const line = getSelectedLine();
         line.position.x = ev.pageX - gCanvas.getBoundingClientRect().left;
         line.position.y = ev.pageY - gCanvas.getBoundingClientRect().top;
@@ -120,14 +120,6 @@ function resizeEditor() {
     elEditor.style.height = gCanvas.height + 'px';
 }
 
-// function toggleActiceNav() {
-//     var els = document.querySelectorAll('.nav-link');
-//     els.forEach(element => {
-//         if (element.className.includes('marked')) element.className = 'nav-link';
-//         else element.className = 'nav-link marked';
-//     });
-// }
-
 function scrollToAbout() {
     const elTarget = document.querySelector('.about');
     var pos = elTarget.getBoundingClientRect();
@@ -138,9 +130,6 @@ function scrollToAbout() {
     }
     window.scrollTo(options);
 }
-
-
-/**** event handlers *****/
 
 function handleFontFamily(font) {
     setFontFamily(font)
@@ -171,10 +160,10 @@ function handleFillColor() {
     drawText();
 }
 
-function handleAddLine() {
+function handleAddLine(txt) {
     document.querySelector('.text-input').value = '';
-    addTextLine();
-    setCanvasSizes(gCanvas.width);
+    // setCanvasSizes(gCanvas.width);
+    addTextLine(txt);
     drawText();
 }
 
@@ -193,11 +182,13 @@ function handleChangeLine(diff) {
 function handleFontSize(num) {
     setfontSize(num);
     drawText();
+    markSelectedText();
 }
 
 function handleTextAlign(align) {
     setTextAlign(align);
     drawText();
+    markSelectedText();
 }
 
 function handleTextChange(ev) {
@@ -209,10 +200,9 @@ function handleTextChange(ev) {
 
 function markSelectedText() {
     const line = getSelectedLine();
-    const textProps = gCtx.measureText(line.txt, 'Impact');
+    let posX = 0;
     let posY = line.position.y - line.size;
-    let posX = line.position.x - textProps.width / 2 - 10;
-    if (!gIsCanvasDone) drawRect(posX, posY, textProps.width + 20, line.size + 10);
+    drawRect(posX, posY, gCanvas.width, line.size + 20);
 }
 
 function drawRect(x, y, width, height) {
@@ -259,12 +249,6 @@ function downloadCanvas(elLink) {
     elLink.download = 'my-canvas.jpg';
 }
 
-function saveCanvas() {
-    const canvas = getCanvas();
-    gSavedMems.push(canvas.toDataURL());
-    saveToStorage(STORAGE_KEY, gSavedMems)
-    console.log(gSavedMems);
-}
 
 function doneCanvas() {
     const lines = getLines();
@@ -278,4 +262,17 @@ function doneCanvas() {
         gCtx.fillText(line.txt, line.position.x, line.position.y);
         gCtx.strokeText(line.txt, line.position.x, line.position.y);
     });
+}
+
+function onSaveCanvas() {
+    const data = gCanvas.toDataURL();
+    saveCanvas(data);
+}
+
+function toggleMenu() {
+    var curr = document.querySelector('nav').style.visibility;
+    console.log(curr);
+    if (curr === 'hidden') curr = 'visible';
+    else curr = 'hidden';
+    document.querySelector('nav').style.visibility = curr;
 }

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/savedMemes.css">
+    <title>memes</title>
+</head>
+
+<body onload="initSaveMemes()">
+    <header class="flex space-between align-center container">
+        <a href="index.html"><img class="logo" src="img/logo.png" alt="" /></a>
+        <nav>
+            <a class="nav-link" href="index.html">Gallery</a>
+            <a class="nav-link" href="savedMemes.html">Memes</a>
+        </nav>
+    </header>
+    <div class="saved-memes"></div>
+    <script src="js/localstorage.js"></script>
+
+    <footer class="main-footer flex justify-center align-center">
+        <small>© 2020 Coffee-Rights</small>
+    </footer>
+
+</body>
+
+</html>
