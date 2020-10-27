@@ -1,7 +1,9 @@
     .editor {
-        padding: 0 3.125rem 0 3.125rem;
+        padding: 3rem 3.125rem 2rem 3.125rem;
         margin-top: 3rem;
-        margin-bottom: 3rem;
+        /* margin-bottom: 3rem; */
+        width: 1000px;
+        margin: 0 auto;
     }
     
     .canvas-container {
@@ -131,7 +133,17 @@
         cursor: pointer;
     }
     
+    .main-footer {
+        position: absolute;
+    }
+    
     @media (max-width: 1030px) {
+        .main-footer {
+            position: static;
+        }
+        .editor {
+            width: 100%;
+        }
         .fa-icon {
             font-size: 40px;
         }
@@ -180,6 +192,10 @@
         }
         .sticker {
             font-size: 35px;
+        }
+        .main-footer {
+            height: 3rem;
+            margin-top: 1rem;
         }
     }
     
